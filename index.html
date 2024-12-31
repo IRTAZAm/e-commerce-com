@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium E-Commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Premium Animations */
+        @keyframes floatAnimation {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(5deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(15px) rotate(-5deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        @keyframes glowingBorder {
+            0% { box-shadow: 0 0 5px #4F46E5, 0 0 10px #4F46E5, 0 0 15px #4F46E5; }
+            50% { box-shadow: 0 0 10px #4F46E5, 0 0 20px #4F46E5, 0 0 30px #4F46E5; }
+            100% { box-shadow: 0 0 5px #4F46E5, 0 0 10px #4F46E5, 0 0 15px #4F46E5; }
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; } 
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Premium Elements */
+        .premium-bg {
+            background: linear-gradient(-45deg, #1a1a1a, #2a2a2a, #3a3a3a, #2a2a2a);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+        }
+
+        .floating {
+            animation: floatAnimation 6s ease-in-out infinite;
+        }
+
+        .glowing {
+            animation: glowingBorder 2s ease-in-out infinite;
+        }
+
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: all 0.8s ease;
+        }
+
+        .card-3d:hover {
+            transform: rotateX(10deg) rotateY(10deg);
+        }
+
+        /* Glass Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Magnetic Button Effect */
+        .magnetic-btn {
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Particle Background */
+        #particles-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Premium Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #4F46E5, #EC4899);
+            border-radius: 5px;
+        }
+
+        /* Loading Animation */
+        .premium-loader {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #4F46E5;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="premium-bg text-white min-h-screen">
+    <!-- Particle Background -->
+    <div id="particles-bg"></div>
+
+    <!-- Premium Navbar -->
+    <nav class="fixed w-full z-50 glass">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <h1 class="text-3xl font-bold floating">
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                        LUXE
+                    </span>
+                </h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-purple-500 transition-colors duration-300">Home</a>
+                    <a href="#products" class="hover:text-purple-500 transition-colors duration-300">Products</a>
+                    <a href="#contact" class="hover:text-purple-500 transition-colors duration-300">Contact</a>
+                    <button id="cart-btn" class="relative">
+                        <i class="fas fa-shopping-cart text-purple-500"></i>
+                        <span class="absolute -top-2 -right-2 bg-pink-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="text-center z-10">
+            <h1 class="text-7xl font-bold mb-6 floating">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                    Future of Shopping
+                </span>
+            </h1>
+            <p class="text-xl mb-8 opacity-80">Experience luxury at your fingertips</p>
+            <button class="magnetic-btn glass px-8 py-4 rounded-full text-lg font-semibold hover:bg-purple-500 transition-all duration-300">
+                Explore Collection
+            </button>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                    Featured Products
+                </span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Product Card -->
+                <div class="card-3d glass p-6 rounded-xl">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="https://via.placeholder.com/300" alt="Product" class="w-full h-64 object-cover transition-transform duration-300 hover:scale-110">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Premium Watch</h3>
+                    <p class="text-purple-500 text-lg mb-4">$499.99</p>
+                    <button class="w-full glass py-3 rounded-lg hover:bg-purple-500 transition-all duration-300">
+                        Add to Cart
+                    </button>
+                </div>
+                <!-- More product cards... -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
+                    Get in Touch
+                </span>
+            </h2>
+            <div class="max-w-2xl mx-auto glass p-8 rounded-xl">
+                <form class="space-y-6">
+                    <div class="relative">
+                        <input type="text" placeholder="Your Name" 
+                               class="w-full bg-transparent border border-purple-500 p-4 rounded-lg focus:outline-none focus:border-pink-500 transition-colors">
+                    </div>
+                    <div class="relative">
+                        <input type="email" placeholder="Your Email" 
+                               class="w-full bg-transparent border border-purple-500 p-4 rounded-lg focus:outline-none focus:border-pink-500 transition-colors">
+                    </div>
+                    <div class="relative">
+                        <textarea rows="4" placeholder="Your Message" 
+                                  class="w-full bg-transparent border border-purple-500 p-4 rounded-lg focus:outline-none focus:border-pink-500 transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full glass py-4 rounded-lg hover:bg-purple-500 transition-all duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Particle Background
+        function initParticles() {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('particles-bg').appendChild(renderer.domElement);
+
+            const particles = new THREE.Points(
+                new THREE.BufferGeometry(),
+                new THREE.PointsMaterial({ size: 0.005, color: 0x4F46E5 })
+            );
+
+            const positions = [];
+            for(let i = 0; i < 1000; i++) {
+                positions.push(
+                    Math.random() * 2 - 1,
+                    Math.random() * 2 - 1,
+                    Math.random() * 2 - 1
+                );
+            }
+            particles.geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+
+            scene.add(particles);
+            camera.position.z = 1;
+
+            function animate() {
+                requestAnimationFrame(animate);
+                particles.rotation.x += 0.0001;
+                particles.rotation.y += 0.0001;
+                renderer.render(scene, camera);
+            }
+            animate();
+        }
+
+        // Magnetic Button Effect
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const deltaX = (x - centerX) / centerX;
+                const deltaY = (y - centerY) / centerY;
+                
+                btn.style.transform = `translate(${deltaX * 10}px, ${deltaY * 10}px)`;
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initParticles();
+        });
+    </script>
+</body>
+</html>
